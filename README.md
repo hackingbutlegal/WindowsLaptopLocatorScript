@@ -7,3 +7,4 @@ This script, when set to run automatically or run manually, will email you your 
 Syntax for cronjob as follows: powershell.exe 'c:\scripts\script.ps1'
 
 Note: It's preconfigured for Gmail. You may need to tweak settings, especially if you're getting authentication errors.
+Note: Make sure you add your API key if you want to do geolocation on the IP.
