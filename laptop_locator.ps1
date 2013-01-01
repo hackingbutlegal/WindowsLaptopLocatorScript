@@ -57,7 +57,7 @@ $ipAddress1 = [System.Text.Encoding]::ASCII.GetString($webpage)
 # Let's get some location information.
 # Make sure you get an API key here (http://ipinfodb.com/register.php) and set it without brackets below.
 #
-$ipGeoInfoUrl = "http://api.ipinfodb.com/v3/ip-city/?key=842604e08e96b097fa8e34dd2f535cd2015c74587055041d652dd56334a2b11d&format=raw&ip=$ipAddress1"
+$ipGeoInfoUrl = "http://api.ipinfodb.com/v3/ip-city/?key=<yourAPIkey>&format=raw&ip=$ipAddress1"
 $ipAddressGeoInfo = (new-object System.Net.WebClient).DownloadString($ipGeoInfoUrl)
 
 # Let's get some reverse DNS on that IP.
