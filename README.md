@@ -4,7 +4,8 @@ This script, when set to run automatically or run manually, will email you your 
 2. At powershell prompt, type "Set-ExecutionPolicy RemoteSigned" to allow your script to run
 3. Put the script.ps1 somewhere safe/sane and add to either Task Scheduler (gui) or 'at' (Win 7) or 'schtasks' (Win 8)
 
-Syntax for cronjob as follows: powershell.exe 'c:\scripts\script.ps1'
+* Syntax for cronjob as follows: powershell.exe 'c:\scripts\script.ps1'
 
-Note: It's preconfigured for Gmail. You may need to tweak settings, especially if you're getting authentication errors.
-Note: Make sure you add your API key if you want to do geolocation on the IP.
+* Script is preconfigured for Gmail. You may need to tweak settings, especially if you're getting authentication errors.
+* Make sure you add your API key if you want to do geolocation on the IP.
+* Read my comments.
