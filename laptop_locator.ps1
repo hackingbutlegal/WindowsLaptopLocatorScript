@@ -23,7 +23,6 @@ Function Send-EMail1 {
             mandatory=$false)]
         [String]$Password
     )
-
         $SMTPServer = "smtp.gmail.com" 
         $SMTPMessage = New-Object System.Net.Mail.MailMessage($EmailFrom,$EmailTo,$Subject,$Body)
 
@@ -40,28 +39,34 @@ Function Send-EMail1 {
         $SMTPClient.Send($SMTPMessage)
         Remove-Variable -Name SMTPClient
         Remove-Variable -Name Password
-
 } 
 
-# The url variable can be set to whatever site you like
+# The url variable can be set to whatever site you like.
+# You can also set a proxy by setting the 'proxy' variable
 #
-$url = "http://checkip.dyndns.org"
-
+$ipInfoUrl = "http://bot.whatismyipaddress.com"
 $col = new-object System.Collections.Specialized.NameValueCollection
 $col.Add("a","stats")
 $col.Add("s","s451qaz2WSX")
-
 $wc = new-object system.net.WebClient
 $wc.proxy = $proxy
 $wc.QueryString = $col
-$webpage = $wc.DownloadData($url)
-$ipaddress1 = [System.Text.Encoding]::ASCII.GetString($webpage)
+$webpage = $wc.DownloadData($ipInfoUrl)
+$ipAddress1 = [System.Text.Encoding]::ASCII.GetString($webpage)
 
-# You can uncomment this if you want to run this script from the command line for testing a modification to the URL
+# Let's get some location information.
+# Make sure you get an API key here (http://ipinfodb.com/register.php) and set it without brackets below.
 #
-# echo "$ipaddress1"
+$ipGeoInfoUrl = "http://api.ipinfodb.com/v3/ip-city/?key=842604e08e96b097fa8e34dd2f535cd2015c74587055041d652dd56334a2b11d&format=raw&ip=$ipAddress1"
+$ipAddressGeoInfo = (new-object System.Net.WebClient).DownloadString($ipGeoInfoUrl)
+
+# Let's get some reverse DNS on that IP.
+#
+$ipAddressrDNS = [System.Net.Dns]::GetHostByAddress($ipAddress1) | Add-Member -Name IP -Value $_ -MemberType NoteProperty -PassThru| Select HostName
 
 # Modify the values here. You'll need to store credentials in plaintext, so don't use an important one, capiche?
+# You may also wish to hide this script somewhere in the filesystem.
 #
-Send-EMail1 -EmailTo "youremail@gmail.com" -EmailFrom "youremail@gmail.com" -Body "$ipaddress1" -Subject "IP Address" -password "plaintextpw"
+Send-EMail1 -EmailTo "youremail@gmail.com" -EmailFrom "youremail@gmail.com" -Body "WhatIsMyIPAddress.com thinks the IP is: $ipAddress1 `nThe presumed hostname (reverse DNS) is: $ipAddressrDNS `nIPInfoDB.com lists this location: $ipAddressGeoInfo" -Subject "Laptop Locator Script" -password "yourpasswordhere"
 
+#
