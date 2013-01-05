@@ -1,4 +1,4 @@
-This script, when set to run automatically or run manually, will email you your machine's visible IP, and also runs a reverse DNS lookup and GeoIP lookup on the IP.
+This Windows/PowerShell script will email you your machine's visible IP and also runs a reverse DNS lookup and GeoIP lookup on the IP.
 
 * Script is preconfigured for Gmail. You may need to tweak settings, especially if you're getting authentication errors.
 * Make sure you add your API key if you want to do geolocation on the IP.
